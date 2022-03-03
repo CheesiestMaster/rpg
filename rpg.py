@@ -21,7 +21,6 @@ while True:
     while l!='##### End Args #####':
         l=f.readline()
         if l!='##### End Args #####':
-            print(l[1])
             i=0
             a=0
             c=""
@@ -41,4 +40,4 @@ while True:
             if u==c:
                 e=n.lstrip()
                 
-    break
+#    break
