@@ -1,7 +1,7 @@
 import conf
 e=-1
 while True:
-    n=conf.story+"/Events/"+str(e)
+    n=f"{conf.story}/Events/{e}.rpg"
     f=open(n)
     l=""
     while l!='##### Begin Story #####\n':
