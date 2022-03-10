@@ -1,8 +1,32 @@
 import conf
+
+pe=-1
 e=-1
+try:
+    f=open(f"{conf.story}/Events/story.py")
+except OSError:
+    pass
+else:
+    f.close()
+    #story=f"{conf.story}/Events/story.py"
+    from Events.story import *
+
+try:
+    f=open(f"{conf.story}/Events/-1.rpg")
+except BaseException:
+    raise
+else:
+    f.close()
+
 while True:
     n=f"{conf.story}/Events/{e}.rpg"
-    f=open(n)
+    try:
+        f=open(n)
+    except OSError:
+        print(f"Event {e} Does Not Exist")
+        e=pe
+        n=f"{conf.story}/Events/{e}.rpg"
+        f=open(n)
     l=""
     while l!='##### Begin Story #####\n':
         l=f.readline()
@@ -25,19 +49,32 @@ while True:
             a=0
             c=""
             n=""
-            for i in range(len(l)):
-                if l[i]=="[":
+            tmp=""
+            for i in l:
+                if i=="[":
                     a=1
-                elif l[i]==",":
+                elif i=="]":
                     a=2
-                    i+=1
-                elif l[i]=="]":
-                    a=3
                 elif a==1:
-                    c=c+l[i]
+                    tmp+=i
                 elif a==2:
-                    n=n+l[i]
+                    tmp=tmp.split(", ")
+                    break
+            if type(tmp)==type([]):
+                c=tmp[0]
+                n=tmp[1]
             if u==c:
+                pe=e
+                if n=="end":
+                    break
+                if len(tmp)>2:
+                    ev=tmp[2]
+                    eval(ev)
                 e=n.lstrip()
-                
+            elif u=="i":
+                inventory()
+                u=""
+            elif u=="n":
+                shownotes()
+                u=""
 #    break
