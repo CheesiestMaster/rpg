@@ -1,0 +1,14 @@
+# Event ID 01 # The Shop
+##### Begin Story #####
+You Go to the Shop
+0: Leave Shop
+1: Buy Sword (10 Gold)
+2: Buy Leather Armor (10 Gold)
+3: Buy Potion (10 Gold)
+##### End Story #####
+##### Begin Args #####
+[0, 0]
+[1, 01, e011()]
+[2, 01, e012()]
+[3, 01, e013()]
+##### End Args #####

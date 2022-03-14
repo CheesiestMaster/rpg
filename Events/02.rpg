@@ -1,0 +1,10 @@
+# Event ID 02 # The Guild
+##### Begin Story #####
+You Go to the Guild Hall
+0: Leave Guild Hall
+1: Talk to Guildmaster
+##### End Story #####
+##### Begin Args #####
+[0, 0]
+[1, 02, e021()]
+##### End Args #####

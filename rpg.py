@@ -8,7 +8,6 @@ except OSError:
     pass
 else:
     f.close()
-    #story=f"{conf.story}/Events/story.py"
     from Events.story import *
 
 try:
