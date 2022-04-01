@@ -1,5 +1,14 @@
-import conf
+import conf,osdetect,os
 
+o=osdetect.whereami()
+
+def clear():
+    if o=="idle":
+        0+0
+    elif o=="lin":
+        os.system('clear')
+    elif o=="win":
+        os.system('cls')
 pe=-1
 e=-1
 try:
@@ -57,13 +66,14 @@ while True:
                 elif a==1:
                     tmp+=i
                 elif a==2:
-                    tmp=tmp.split(", ")
+                    tmp=tmp.split(", ",2)
                     break
             if type(tmp)==type([]):
                 c=tmp[0]
                 n=tmp[1]
             if u==c:
                 pe=e
+                clear()
                 if n=="end":
                     break
                 if len(tmp)>2:

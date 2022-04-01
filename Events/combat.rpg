@@ -1,0 +1,12 @@
+##### Begin Story #####
+You are being attacked by a Name
+You have 10 Health
+1: Attack with Fists
+2: Block
+3: Use a Potion
+##### End Story #####
+##### Begin Args #####
+[1, combat, combatturn('atk')]
+[2, combat, combatturn('blk')]
+[3, combat, combatturn('pot')]
+##### End Args #####
