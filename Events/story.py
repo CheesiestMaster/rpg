@@ -7,6 +7,7 @@ hp=10
 dc=0
 dmg=1
 cmbmeta=dict()
+set_e=""
 
 def inventory():
     for k in inv.keys():
@@ -52,8 +53,7 @@ def additem(name, count):
         invc[i]+=count
         return True
     else:
-        inv.append(name)
-        invc.append(count)
+        inv[name]=count
         return True
 
 def checkitem(name, count):
@@ -72,8 +72,8 @@ def startcombat(ename, ehp, eac, edmg, rew, n):
     ehp=int(ehp)
     eac=int(eac)
     edmg=int(edmg)
-    global cmbmeta
-    cmbmeta={"name":ename, 'hp':ehp, 'ac':eac, 'dmg':edmg, 'rew':rew, 'aiblk':False, 'next': n}
+    global cmbmeta, set_e
+    cmbmeta={"ename":ename, 'ehp':ehp, 'eac':eac, 'edmg':edmg, 'rew':rew, 'aiblk':False, 'next': n}
     try:
         f=open("./Events/combat.rpg", "w")
     except OSError:
@@ -91,17 +91,20 @@ def startcombat(ename, ehp, eac, edmg, rew, n):
     f.write("[3, combat, combatturn('pot')]\n")
     f.write("##### End Args #####")
     f.close()
+    set_e = "combat"
 
 def combatturn(act):
     pblk=False
-    global cmbmeta,hp
+    global cmbmeta, hp, set_e
+    set_e = 'combat'
     if act=='atk':
         if cmbmeta['aiblk']:
             cmbmeta['ehp']-=max(0,dmg-cmbmeta['eac'])
         else:
             cmbmeta['ehp']-=dmg
     if cmbmeta['ehp'] <= 0:
-        e=n
+        set_e=cmbmeta["next"]
+        cmbmeta=dict()
         return True
     elif act=='blk':
         print("You Blocked")
@@ -118,11 +121,28 @@ def combatturn(act):
             print(f"The {cmbmeta['ename']} attacked you but you blocked it, you took {max(0,cmbmeta['edmg']-dc)} damage.")
         else:
             hp-=cmbmeta['edmg']
-            print(f"The {cmbmeta['ename']} attacked you but you blocked it, you took {cmbmeta['edmg']} damage.")
+            print(f"The {cmbmeta['ename']} attacked you, you took {cmbmeta['edmg']} damage.")
         if hp<=0:
             raise ValueError("HP Must be Greater Than 0, You Lose")
     elif ai=='blk':
         cmbmeta['aiblk']=True
+    try:
+        f=open("./Events/combat.rpg", "w")
+    except OSError:
+        f=open("./Events/combat.rpg", "x")
+    f.write("##### Begin Story #####\n")
+    f.newlines
+    f.write(f"You are being attacked by a {cmbmeta['ename']}\n")
+    f.write(f"You have {hp} Health\n")
+    f.write(f"1: Attack with {equ['Wep']}\n")
+    f.write("2: Block\n")
+    f.write("3: Use a Potion\n")
+    f.write("##### End Story #####\n##### Begin Args #####\n")
+    f.write("[1, combat, combatturn('atk')]\n")
+    f.write("[2, combat, combatturn('blk')]\n")
+    f.write("[3, combat, combatturn('pot')]\n")
+    f.write("##### End Args #####")
+    f.close()
     
 def e011():
     if checkitem("Gold", 10):

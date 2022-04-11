@@ -76,10 +76,13 @@ while True:
                 clear()
                 if n=="end":
                     break
+                e=n.lstrip()
                 if len(tmp)>2:
                     ev=tmp[2]
                     eval(ev)
-                e=n.lstrip()
+                    if set_e != '':
+                        e=set_e
+                        set_e = ''
             elif u=="i":
                 inventory()
                 u=""

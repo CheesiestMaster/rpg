@@ -1,0 +1,8 @@
+# Event ID 11 # After First Combat
+##### Begin Story #####
+You Defeated the Goblin, Sadly that is the last thing I have Implemented
+1: Restart The Game
+##### End Story #####
+##### Begin Args #####
+[1, -1]
+##### End Args #####

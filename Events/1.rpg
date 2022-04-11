@@ -1,8 +1,12 @@
 # Event ID 1 # Leaving Town
 ##### Begin Story #####
-You Have reached the end of what has been Foretold
-Press 1 to return to the beginning
+You have reached a crossroads
+1: Go Left
+2: Continue Forwards (Not Implemented, Sends you to Beginning)
+3: Go Right (Not Implemented, Sends you to Beginning)
 ##### End Story #####
 ##### Begin Args #####
-[1, -1]
+[1, combat, startcombat("Goblin", 5, 0, 1, "None", "11")]
+[2, -1]
+[3, -1]
 ##### End Args #####
